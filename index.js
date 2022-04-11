@@ -1,10 +1,10 @@
 "use strict"
 
 let wordList = [
-    // 'piano',
-    // 'patio',
-    // 'women',
-    // 'darts'
+    'piano',
+    'patio',
+    'women',
+    'darts',
     'horse'
 ]
 
@@ -17,6 +17,7 @@ let history = []
 let grid = document.getElementById('grid')
 buildGrid()
 updateGrid()
+window.addEventListener('keydown',handleKeyDOwn)
 
 function buildGrid(){
     for(let i = 0; i <6; i++){
@@ -58,6 +59,27 @@ function drawAttempt(row,attempt,isCurrent){
     }
 }
 
+function handleKeyDOwn(e){
+    let letter  = e.key.toLowerCase()
+    if(letter === 'enter'){
+       if(currentAttempt.length < 5){
+           return
+       }
+       if(!wordList.includes(currentAttempt)){
+           alert('not in my thesaurus')
+           return
+       }
+       history.push(currentAttempt )
+        currentAttempt  = ''
+    }else if(letter === 'backspace'){
+        currentAttempt = currentAttempt.slice(0,currentAttempt.length -1)
+    }else if(/[a-z]/.test(letter)){
+       if(currentAttempt.length < 5) {
+           currentAttempt += letter
+       }
+    }
+    updateGrid()
+}
 
 
 function getBgColor(attempt,i){
