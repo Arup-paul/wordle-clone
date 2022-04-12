@@ -17,7 +17,7 @@ let history = []
 let grid = document.getElementById('grid')
 buildGrid()
 updateGrid()
-window.addEventListener('keydown',handleKeyDOwn)
+window.addEventListener('keydown',handleKeyDown)
 
 function buildGrid(){
     for(let i = 0; i <6; i++){
@@ -59,7 +59,10 @@ function drawAttempt(row,attempt,isCurrent){
     }
 }
 
-function handleKeyDOwn(e){
+function handleKeyDown(e){
+    if(e.ctrlKey || e.metaKey || e.altKey){
+        return
+    }
     let letter  = e.key.toLowerCase()
     if(letter === 'enter'){
        if(currentAttempt.length < 5){
@@ -73,7 +76,7 @@ function handleKeyDOwn(e){
         currentAttempt  = ''
     }else if(letter === 'backspace'){
         currentAttempt = currentAttempt.slice(0,currentAttempt.length -1)
-    }else if(/[a-z]/.test(letter)){
+    }else if(/[a-z]$/.test(letter)){
        if(currentAttempt.length < 5) {
            currentAttempt += letter
        }
