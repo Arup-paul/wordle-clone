@@ -67,27 +67,31 @@ function handleKeyDown(e){
     if(e.ctrlKey || e.metaKey || e.altKey){
         return
     }
-    let letter  = e.key.toLowerCase()
+    handleKey(e.key)
+}
+
+
+function handleKey(key){
+    let letter  = key.toLowerCase()
     if(letter === 'enter'){
-       if(currentAttempt.length < 5){
-           return
-       }
-       if(!wordList.includes(currentAttempt)){
-           alert('not in my thesaurus')
-           return
-       }
-       history.push(currentAttempt )
+        if(currentAttempt.length < 5){
+            return
+        }
+        if(!wordList.includes(currentAttempt)){
+            alert('not in my thesaurus')
+            return
+        }
+        history.push(currentAttempt )
         currentAttempt  = ''
     }else if(letter === 'backspace'){
         currentAttempt = currentAttempt.slice(0,currentAttempt.length -1)
     }else if(/[a-z]$/.test(letter)){
-       if(currentAttempt.length < 5) {
-           currentAttempt += letter
-       }
+        if(currentAttempt.length < 5) {
+            currentAttempt += letter
+        }
     }
     updateGrid()
 }
-
 
 
 function getBgColor(attempt,i){
@@ -109,15 +113,35 @@ function buildKeyboard(){
     buildKeyboardRow('zxcvbnm',true)
 }
 
-function buildKeyboardRow(letters){
+function buildKeyboardRow(letters,isLastRow){
     let row = document.createElement('div')
+    if(isLastRow){
+        let button =  document.createElement('button')
+        button.className = 'button'
+        button.textContent = 'Enter'
+        button.style.backgroundColor = LIGHTGREY
+        button.onclick = () => {
+              handleKey('enter')
+        };
+        row.appendChild(button)
+    }
     for(let letter of letters){
         let button = document.createElement('button')
         button.className = 'button'
         button.textContent = letter
         button.style.backgroundColor = LIGHTGREY
         button.onclick = () => {
-
+            handleKey(letter)
+        };
+        row.appendChild(button)
+    }
+    if(isLastRow){
+        let button =  document.createElement('button')
+        button.className = 'button'
+        button.textContent = 'Backspace'
+        button.style.backgroundColor = LIGHTGREY
+        button.onclick = () => {
+            handleKey('backspace')
         };
         row.appendChild(button)
     }
