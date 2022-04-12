@@ -11,8 +11,20 @@
             text-align: center;
             text-transform: uppercase;
         }
+        body,html, #screen{
+            height: 100vh;
+            width: 100vh;
+        }
+        #screen{
+            display: flex;
+            flex-direction: column;
+        }
         h1{
             font-size: 42px;
+            flex:none;
+        }
+        #grid{
+            flex: 1 1 auto;
         }
         .cell{
             height: 60px;
@@ -22,7 +34,19 @@
             display: inline-block;
             margin: 10px;
             font-size: 40px;
-
+            font-weight: bold;
+        }
+        #keyboard{
+           flex:none;
+            padding: 20px;
+        }
+        .button{
+            text-transform: uppercase;
+            padding: 15px;
+            margin:2px;
+            border-radius: 10px;
+            border: none;
+            font-size: 16px;
         }
     </style>
 
@@ -30,7 +54,10 @@
 <body>
 
 <h1>Wordle</h1>
+<div class="screen">
 <div id="grid"></div>
+<div id="keyboard"></div>
+</div>
 
 <script src="index.js"></script>
 </body>
