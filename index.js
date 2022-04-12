@@ -14,12 +14,14 @@ let secret = wordList[randomIndex]
 let currentAttempt = ''
 let history = []
 
-let grid = document.getElementById('grid')
-let keyboard = document.getElementById('keyboard')
-buildGrid()
-buildKeyboard()
-updateGrid()
-window.addEventListener('keydown',handleKeyDown)
+let GREY = '#212121'
+let LIGHTGREY = '#888'
+let GREEN = '#538d4e'
+let YELLOW = '#b59f3b'
+let BLACK = '#111'
+
+
+
 
 function buildGrid(){
     for(let i = 0; i <6; i++){
@@ -52,7 +54,7 @@ function drawAttempt(row,attempt,isCurrent){
             cell.innerHTML = '<div style="opacity: 0">X</div>'
         }
         if(isCurrent){
-            cell.style.backgroundColor = '#111'
+            cell.style.backgroundColor = BLACK
         }else{
             cell.style.backgroundColor = getBgColor(attempt,i)
         }
@@ -87,17 +89,18 @@ function handleKeyDown(e){
 }
 
 
+
 function getBgColor(attempt,i){
     let correctLetter = secret[i]
     let attemptLetter = attempt[i]
     if(attemptLetter === undefined || secret.indexOf(attemptLetter) === -1){
-        return '#212121'
+        return GREY
     }
     if(correctLetter === attemptLetter){
-        return '#538d4e'
+        return GREEN
     }
 
-    return '#b59f3b'
+    return YELLOW
 }
 
 function buildKeyboard(){
@@ -112,6 +115,7 @@ function buildKeyboardRow(letters){
         let button = document.createElement('button')
         button.className = 'button'
         button.textContent = letter
+        button.style.backgroundColor = LIGHTGREY
         button.onclick = () => {
 
         };
@@ -120,6 +124,14 @@ function buildKeyboardRow(letters){
     keyboard.appendChild(row)
 }
 
+
+
+let grid = document.getElementById('grid')
+let keyboard = document.getElementById('keyboard')
+buildGrid()
+buildKeyboard()
+updateGrid()
+window.addEventListener('keydown',handleKeyDown)
 
 
 
