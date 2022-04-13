@@ -84,12 +84,13 @@ function handleKey(key){
             alert('not in my thesaurus')
             return
         }
-        if(history.length ===  5 && cur rentAttempt !== secret ){
+        if(history.length ===  5 && currentAttempt !== secret ){
             alert(secret)
         }
         history.push(currentAttempt )
         currentAttempt  = ''
         updateKeyBoard()
+        saveGame()
 
     }else if(letter === 'backspace'){
         currentAttempt = currentAttempt.slice(0,currentAttempt.length -1)
@@ -184,11 +185,34 @@ function updateKeyBoard(){
    }
 }
 
+function loadGame(){
+   let data
+    try {
+       data = JSON.parse(localStorage.getItem('data'))
+    }catch {}
+    if(data != null){
+        if(data.secret === secret){
+            history = data.history
+        }
+    }
+}
 
+function saveGame(){
+   let data = JSON.stringify({
+       secret,
+       history
+   })
+    try{
+       localStorage.setItem('data',data)
+    }catch {
+
+    }
+}
 
 let grid = document.getElementById('grid')
 let keyboard = document.getElementById('keyboard')
 let keyboardButtons = new Map()
+loadGame()
 buildGrid()
 buildKeyboard()
 updateGrid()
