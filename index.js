@@ -83,6 +83,7 @@ function handleKey(key){
         }
         history.push(currentAttempt )
         currentAttempt  = ''
+        updateKeyBoard()
     }else if(letter === 'backspace'){
         currentAttempt = currentAttempt.slice(0,currentAttempt.length -1)
     }else if(/[a-z]$/.test(letter)){
@@ -91,6 +92,7 @@ function handleKey(key){
         }
     }
     updateGrid()
+
 }
 
 
@@ -133,6 +135,7 @@ function buildKeyboardRow(letters,isLastRow){
         button.onclick = () => {
             handleKey(letter)
         };
+        keyboardButtons.set(letter,button)
         row.appendChild(button)
     }
     if(isLastRow){
@@ -148,13 +151,41 @@ function buildKeyboardRow(letters,isLastRow){
     keyboard.appendChild(row)
 }
 
+function getBetterColor(a,b){
+    if(a === GREEN || b === GREEN){
+        return GREEN
+    }
+    if(a === YELLOW || b === YELLOW){
+        return YELLOW
+    }
+    return GREY;
+}
+
+
+function updateKeyBoard(){
+    let bestColors = new Map()
+    for(let attempt of history){
+        for(let i = 0; i< attempt.length; i++){
+            let color = getBgColor(attempt,i)
+            let key = attempt[i]
+            let bestColor = bestColors.get(key)
+            bestColors.set(key,getBetterColor(color,bestColor));
+        }
+    }
+   for(let [key,button] of keyboardButtons){
+       button.style.backgroundColor = bestColors.get(key)
+   }
+}
+
 
 
 let grid = document.getElementById('grid')
 let keyboard = document.getElementById('keyboard')
+let keyboardButtons = new Map()
 buildGrid()
 buildKeyboard()
 updateGrid()
+updateKeyBoard()
 window.addEventListener('keydown',handleKeyDown)
 
 
