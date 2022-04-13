@@ -53,6 +53,7 @@ function drawAttempt(row,attempt,isCurrent){
             cell.textContent = attempt[i]
         }else{
             cell.innerHTML = '<div style="opacity: 0">X</div>'
+            clearAnimation(cell)
         }
         if(isCurrent){
             cell.style.backgroundColor = BLACK
@@ -103,6 +104,7 @@ function handleKey(key){
     }else if(/[a-z]$/.test(letter)){
         if(currentAttempt.length < 5) {
             currentAttempt += letter
+            animatePress(currentAttempt.length - 1)
         }
     }
     updateGrid()
@@ -190,6 +192,20 @@ function updateKeyBoard(){
        button.style.backgroundColor = bestColors.get(key)
        button.style.borderColor = bestColors.get(key)
    }
+}
+
+function animatePress(index){
+    let rowIndex = history.length
+    let row = grid.children[rowIndex]
+    let cell  = row.children[index]
+    cell.style.animationName = 'press'
+    cell.style.animationDuration = '100ms'
+    cell.style.animationTimingFunction = 'ease-out'
+}
+
+function clearAnimation(cell){
+    cell.style.animationName = ''
+    cell.style.animationDuration = ''
 }
 
 function loadGame(){
