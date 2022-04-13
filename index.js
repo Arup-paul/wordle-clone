@@ -72,6 +72,9 @@ function handleKeyDown(e){
 
 
 function handleKey(key){
+    if(history.length === 6){
+        return
+    }
     let letter  = key.toLowerCase()
     if(letter === 'enter'){
         if(currentAttempt.length < 5){
@@ -81,9 +84,13 @@ function handleKey(key){
             alert('not in my thesaurus')
             return
         }
+        if(history.length ===  5 && cur rentAttempt !== secret ){
+            alert(secret)
+        }
         history.push(currentAttempt )
         currentAttempt  = ''
         updateKeyBoard()
+
     }else if(letter === 'backspace'){
         currentAttempt = currentAttempt.slice(0,currentAttempt.length -1)
     }else if(/[a-z]$/.test(letter)){
