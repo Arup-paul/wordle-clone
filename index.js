@@ -34,8 +34,12 @@ function buildGrid(){
             front.className = 'front'
             let back = document.createElement('div')
             back.className = 'back'
-            cell.appendChild(front)
-            cell.appendChild(back)
+            let surface = document.createElement('div')
+            surface.className = 'surface'
+            surface.style.transitionDelay = (j * 200) + 'ms'
+            surface.appendChild(front)
+            surface.appendChild(back)
+            cell.appendChild(surface)
             row.appendChild(cell)
         }
         grid.appendChild(row)
@@ -60,8 +64,9 @@ function updateGrid(){
 function drawAttempt(row,attempt,solved){
     for(let i = 0; i< 5; i++){
         let cell = row.children[i]
-        let front = cell.children[0]
-        let back = cell.children[1]
+        let surface = cell.firstChild
+        let front = surface.children[0]
+        let back = surface.children[1]
         if(attempt[i] !== undefined){
             front.textContent = attempt[i]
             back.textContent = attempt[i]
@@ -97,6 +102,9 @@ function handleKey(key){
     if(history.length === 6){
         return
     }
+    if(isAnimating){
+        return
+    }
     let letter  = key.toLowerCase()
     if(letter === 'enter'){
         if(currentAttempt.length < 5){
@@ -113,6 +121,7 @@ function handleKey(key){
         currentAttempt  = ''
         updateKeyBoard()
         saveGame()
+        pauseInput()
 
     }else if(letter === 'backspace'){
         currentAttempt = currentAttempt.slice(0,currentAttempt.length -1)
@@ -124,6 +133,15 @@ function handleKey(key){
     }
     updateGrid()
 
+}
+
+let isAnimating = false;
+function pauseInput(){
+  if(isAnimating) throw Error('should never happen')
+    isAnimating = true
+    setTimeout(() => {
+        isAnimating = false
+    },2000)
 }
 
 

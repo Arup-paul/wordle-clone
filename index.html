@@ -34,29 +34,36 @@
             margin: 4px;
             font-size: 40px;
             font-weight: bold;
-            position: relative;
+            perspective:1000px;
         }
-        .cell > .front, .cell > .back  {
+
+        .cell  .front, .cell  .back  {
             border: 2px solid #444;
-            transition: opacity 1s linear;
+            backface-visibility: hidden;
             position: absolute;
             top:0;
             right: 0;
             bottom: 0;
             left: 0;
         }
-        .cell > .front {
-           opacity: 1;
+        .cell.solved .surface, .cell.hover .surface{
+            transform: rotateX(180deg);
         }
-        .cell > .back {
-            opacity: 0;
+        .cell .surface{
+            transition-duration: 500ms;
+            transform-style: preserve-3d;
+            position: relative;
+            width: 100%;
+            height: 100%;
         }
-        .cell.solved > .front{
-            opacity: 0;
+        .cell   .front {
+           z-index: 2;
         }
-        .cell.solved > .back{
-            opacity: 1;
+        .cell  .back {
+            z-index: 1;
+            transform: rotateX(180deg);
         }
+
 
         #keyboard{
             flex:none;
