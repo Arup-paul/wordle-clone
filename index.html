@@ -34,21 +34,28 @@
             margin: 4px;
             font-size: 40px;
             font-weight: bold;
+            position: relative;
         }
         .cell > .front, .cell > .back  {
             border: 2px solid #444;
+            transition: opacity 1s linear;
+            position: absolute;
+            top:0;
+            right: 0;
+            bottom: 0;
+            left: 0;
         }
         .cell > .front {
-           display: block;
+           opacity: 1;
         }
         .cell > .back {
-           display: none;
+            opacity: 0;
         }
         .cell.solved > .front{
-            display: none;
+            opacity: 0;
         }
         .cell.solved > .back{
-          display: block;
+            opacity: 1;
         }
 
         #keyboard{
