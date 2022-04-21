@@ -1,12 +1,11 @@
 "use strict"
 
 let wordList = [
-    'piano',
-    'patio',
-    'women',
-    'darts',
-    'horse'
-]
+    'piano','patio','women','darts','horse','about','above','abuse','actor','acute','adopt','admit','begin','brain','bound','brain','chair','clock','close','cheap'
+    ]
+
+
+
 
 let randomIndex = Math.floor(Math.random() * wordList.length)
 let secret = wordList[randomIndex]

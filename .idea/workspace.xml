@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="777cfb4b-ca6a-4691-bd42-dd097411329b" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,6 +32,7 @@
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/var/www/html/javascript/wordle-clone&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
@@ -50,7 +49,10 @@
       <workItem from="1649654837274" duration="6054000" />
       <workItem from="1649775466839" duration="6905000" />
       <workItem from="1649854895487" duration="11722000" />
-      <workItem from="1649944580434" duration="2060000" />
+      <workItem from="1649944580434" duration="2398000" />
+      <workItem from="1649950617535" duration="26000" />
+      <workItem from="1650039131858" duration="85000" />
+      <workItem from="1650288147232" duration="639000" />
     </task>
     <servers />
   </component>
